@@ -24,6 +24,7 @@ This template is useful only for **Rails 6.1+** apps
 - 🎊 Configure RSpec generators
 - 🎊 Generate a welcome controller, index view and set root path
 - 🎊 Add flash messages partial
+- 🎊 Git commit your initial message
 
 ## Example with the raw URL
 The following script was used to generate the sample application `get_ready_app`
