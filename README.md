@@ -1,5 +1,5 @@
 ## Get Ready Rails
-**Get Read Rails** is a simple rails template which may useful in starting your next project.
+**Get Read Rails** is a simple rails template which may be useful in starting your next project.
 
 ## Assumption
 This template is useful only for **Rails 6.1+** apps
@@ -16,17 +16,19 @@ This template is useful only for **Rails 6.1+** apps
 4. RSpec
 
 ## What the Template does
-Install and setup of the following gems:
-  🎊 Devise
-  🎊 Bootstrap 5
-  🎊 Bootstrap Form
-  🎊 RSpec
-🎊 Configure RSpec generators
-🎊 Generate a welcome controller, index view and set root path
-🎊 Add flash messages partial
+- Install and setup of the following gems:
+  - 🎊 Devise
+  - 🎊 Bootstrap 5
+  - 🎊 Bootstrap Form
+  - 🎊 RSpec
+- 🎊 Configure RSpec generators
+- 🎊 Generate a welcome controller, index view and set root path
+- 🎊 Add flash messages partial
 
-## Example
-
+## Example with the raw URL
+```shell
+  rails new get_ready -m https://raw.githubusercontent.com/earnestaddae/get_ready/main/get_ready.rb
+```
 
 ## Contribution
 This is just a barebone of how I setup most of my rails applications. Please feel to use it as you please or add features which you think might be useful to others
