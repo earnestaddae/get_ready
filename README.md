@@ -29,7 +29,7 @@ This template is useful only for **Rails 6.1+** apps
 The following script was used to generate the sample application `get_ready_app`
 
 ```shell
-  rails new get_ready -m https://raw.githubusercontent.com/earnestaddae/get_ready/main/get_ready.rb
+  rails new get_ready -m https://raw.githubusercontent.com/earnestaddae/get_ready/main/template.rb
 ```
 
 ## Contribution
