@@ -17,10 +17,10 @@ This template is useful only for **Rails 6.1+** apps
 
 ## What the Template does
 - Install and setup of the following gems:
-  - 🎊 Devise
-  - 🎊 Bootstrap 5
-  - 🎊 Bootstrap Form
-  - 🎊 RSpec
+  - 🎊 Devise, 4.8
+  - 🎊 Bootstrap, 5.1
+  - 🎊 Bootstrap Form, 4.5
+  - 🎊 RSpec, 5
 - 🎊 Configure RSpec generators
 - 🎊 Generate a welcome controller, index view and set root path
 - 🎊 Add flash messages partial
