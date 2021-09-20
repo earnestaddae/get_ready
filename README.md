@@ -37,5 +37,5 @@ The following script was used to generate the sample application `get_ready_app`
 This is just a barebone of how I setup most of my rails applications. Please feel to use it as you please or add features which you think might be useful to others
 
 ## Attributions
-Developing this templated was heavily influenced by [Chris Oliver's](https://github.com/excid3) [Jumpstart](https://github.com/excid3/jumpstart) project.
+Developing this template was heavily influenced by [Chris Oliver's](https://github.com/excid3) [Jumpstart](https://github.com/excid3/jumpstart) project.
 
