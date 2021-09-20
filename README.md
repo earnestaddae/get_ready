@@ -26,6 +26,8 @@ This template is useful only for **Rails 6.1+** apps
 - 🎊 Add flash messages partial
 
 ## Example with the raw URL
+The following script was used to generate the sample application `get_ready_app`
+
 ```shell
   rails new get_ready -m https://raw.githubusercontent.com/earnestaddae/get_ready/main/get_ready.rb
 ```
