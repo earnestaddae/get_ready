@@ -11,7 +11,7 @@ This template is useful only for **Rails 6.1+** apps
 
 ## Gems Installed, Setup and Configured
 1. Devise
-2. Boostrap
+2. Bootstrap
 3. Bootstrap Form
 4. RSpec
 
