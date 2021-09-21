@@ -33,6 +33,9 @@ The following script was used to generate the sample application `get_ready_app`
   rails new get_ready -m https://raw.githubusercontent.com/earnestaddae/get_ready/main/template.rb
 ```
 
+## Welcome page
+![Welcome Page](https://github.com/earnestaddae/get_ready/get_ready_app/blob/main/app/assets/images/get_ready_rails.png)
+
 ## Contribution
 This is just a barebone of how I setup most of my rails applications. Please feel to use it as you please or add features which you think might be useful to others
 
