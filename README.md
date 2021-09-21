@@ -22,16 +22,18 @@ This template is useful only for **Rails 6.1+** apps
   - 🎊 Bootstrap Form, 4.5
   - 🎊 RSpec, 5
 - 🎊 Configure RSpec generators
-- 🎊 Generate a welcome controller, index view and set root path
+- 🎊 Generate devise for `your_model_name`
+- 🎊 Style devise forms with [bootstrap_form](https://github.com/bootstrap-ruby/bootstrap_form) for 
+    - registrations
+    - sessions
+    - passwords 
+- 🎊 Generate a welcome 
+    - controller
+    - index view
+- 🎊 Set root path to `welcome#index`
 - 🎊 Add flash messages partial
-- 🎊 Git commit your initial message
-
-## Example with the raw URL
-The following script was used to generate the sample application `get_ready_app`
-
-```shell
-  rails new get_ready -m https://raw.githubusercontent.com/earnestaddae/get_ready/main/template.rb
-```
+- 🎊 Add bootstrap navbar partial
+- 🎊 Make initial git commit
 
 ## Welcome page
 ![Welcome Page](https://github.com/earnestaddae/get_ready/blob/main/get_ready_rails.png)

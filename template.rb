@@ -32,7 +32,137 @@ def devise_setup
   say
   say "✅ Devise #{model_name} is created! and View generated", :green
   say
+
+  say
+  say "Styling devise forms for [registration, login and edit]", :green
+  say
+
+  devise_registration_form
+  devise_login_form
+  devise_edit_form
+  devise_password_form
 end
+
+def devise_registration_form
+  remove_file "app/views/devise/registrations/new.html.erb"
+  registration = <<~EOM
+  <div class="container mt-4 mb-4">
+    <h2>Sign up</h2>
+
+    <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), label_errors: true) do |f| %>
+
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.password_field :password, autocomplete: "new-password" %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+
+        <div class="mt-4"></div>
+
+        <%= f.submit "Sign up", class: "btn btn-success" %>
+    <% end %>
+
+    <div class="mt-3"></div>
+    <%= render "devise/shared/links" %>
+  </div>
+  EOM
+  file "app/views/devise/registrations/new.html.erb", "#{registration}"
+end
+
+def devise_login_form
+  remove_file "app/views/devise/sessions/new.html.erb"
+  login = <<~EOM
+  <div class="container mt-4 mb-4">
+    <h2>Log in</h2>
+
+    <%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name), label_errors: true) do |f| %>
+
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+
+      <%= f.password_field :password, autocomplete: "current-password" %>
+
+      <% if devise_mapping.rememberable? %>
+        <%= f.check_box :remember_me %>
+      <% end %>
+
+      <div class="mt-4"></div>
+
+      <%= f.submit "Log in", class: "btn btn-success" %>
+    <% end %>
+
+    <div class="mt-3"></div>
+    <%= render "devise/shared/links" %>
+  </div>
+  EOM
+
+  file "app/views/devise/sessions/new.html.erb", "#{login}"
+end
+
+def devise_edit_form
+  remove_file "app/views/devise/registrations/edit.html.erb"
+
+  edit = <<~EOM
+  <div class="container mt-4 mb-4">
+    <h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+    <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, label_errors: true) do |f| %>
+
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+
+      <%= f.password_field :password, autocomplete: "new-password" %>
+      <i>(leave blank if you don't want to change it)</i>
+      <% if @minimum_password_length %>
+        <br />
+        <em><%= @minimum_password_length %> characters minimum</em>
+      <% end %>
+
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+
+        <%= f.password_field :current_password, autocomplete: "current-password" %>
+        <i>(we need your current password to confirm your changes)</i>
+
+      <div class="mt-4 mb-3 actions">
+        <%= f.submit "Update", class: "btn btn-success" %>
+      </div>
+    <% end %>
+
+    <h4>Cancel my account</h4>
+
+    <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger btn-sm" %></p>
+
+    <div class="mt-3"></div>
+    <%= link_to "Back", :back %>
+  </div>
+  EOM
+
+  file "app/views/devise/registrations/edit.html.erb", "#{edit}"
+end
+
+def devise_password_form
+  remove_file "app/views/devise/passwords/new.html.erb"
+  password = <<~EOM
+  <div class="container mt-4 mb-4">
+    <h2>Forgot your password?</h2>
+
+    <%= bootstrap_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <div class="mt-4"></div>
+        <%= f.submit "Send me reset password instructions", class: "btn btn-success" %>
+    <% end %>
+    <div class="mt-3"></div>
+    <%= render "devise/shared/links" %>
+  </div>
+  EOM
+  file "app/views/devise/passwords/new.html.erb", "#{password}"
+end
+
 
 def setup_bootstrap
   say "In addition to bootstrap, we setup the boostrap-form gem"
@@ -91,14 +221,10 @@ def static_page
     generate "controller welcome index"
     route "root 'welcome#index'"
 
+    remove_file "app/views/welcome/index.html.erb"
+
     file "app/views/welcome/index.html.erb", <<~EOM
     <div class="container py-4">
-      <header class="pb-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-          <span class="fs-4">GetReady Rails</span>
-        </a>
-      </header>
-
       <div class="p-5 mb-4 bg-light rounded-3">
         <div class="container-fluid py-5">
           <h1 class="display-5 fw-bold">Welcome 🤗</h1>
@@ -136,18 +262,59 @@ def static_page
   say
 end
 
+def navbar
+  say "Generating navbar partial in app/views/layouts folder", :blue
+  say
+  file "app/views/layouts/_navbar.html.erb", <<~EOM
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">GetReady Rails</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <% unless user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "Register", new_user_registration_path, class: "nav-link", aria: {current: "page"}  %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            </li>
+          <% end %>
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "Edit", edit_user_registration_path, class: "nav-link", aria: {current: "page"}  %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>
+            </li>
+          <% end %>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  EOM
+
+  inject_into_file "app/views/layouts/application.html.erb", "\n\t <%= render 'layouts/navbar' %>\n", after: "<body>"
+end
+
 def flash_message
-  say "Generating flash messages partials in app/views/layouts folder", :blue
+  say "Generating flash messages partial in app/views/layouts folder", :blue
   say
   file "app/views/layouts/_flash_messages.html.erb", <<~EOM
     <% flash.each do |key, message| %>
-      <div class="text-center alert alert-<%= key %> alert-dismissible fade show" role="alert">
+      <div class="text-center alert alert-<%= key %> alert-dismissible fade show rounded" role="alert">
         <strong><%= key == 'notice' ? 'Success!' : 'Error!' %></strong>  <%= message %>
       </div>
     <% end %>
   EOM
 
-  inject_into_file "app/views/layouts/application.html.erb", "\n<%= render 'layouts/flash_messages' %>\n", before: "<%= yield %>"
+  inject_into_file "app/views/layouts/application.html.erb", "\n\t <%= render 'layouts/flash_messages' %>\n", after: "<%= render 'layouts/navbar' %>"
 end
 
 def rspec_setup
@@ -207,6 +374,7 @@ end
 after_bundle do
   add_gems
   setup_bootstrap
+  navbar
   flash_message
   static_page
   rspec_setup
